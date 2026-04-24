@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roguim Imobiliaria - Chat Interno</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="login-container" class="container">
+        <div class="login-form">
+            <div class="logo-header">
+                <h1>Roguim Imobiliaria</h1>
+                <p>Chat Interno</p>
+            </div>
+            <h2>Login</h2>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Usuário" required>
+                <input type="password" id="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+            <div id="login-error" class="error"></div>
+            <div class="login-footer">
+                <p>Sistema de comunicação interna</p>
+                <p>Roguim Imobiliaria © 2024</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="chat-container" class="container hidden">
+        <div class="theme-toggle">
+            <button id="theme-toggle-btn" class="theme-btn">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-section">
+                    <h1>Roguim</h1>
+                    <p>Imobiliaria</p>
+                </div>
+                <button id="new-chat-btn"><i class="fas fa-plus"></i></button>
+            </div>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Buscar usuários ou grupos...">
+            </div>
+            <div id="conversations-list" class="conversations-list">
+                <!-- Conversations will be loaded here -->
+            </div>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <span id="current-user"></span>
+                    <button id="logout-btn">Sair</button>
+                </div>
+                <div id="admin-panel" class="admin-panel hidden">
+                    <button id="manage-users-btn">Gerenciar Usuários</button>
+                    <button id="manage-groups-btn">Gerenciar Grupos</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-area">
+            <div id="chat-header" class="chat-header">
+                <div class="chat-info">
+                    <h4 id="chat-title">Selecione uma conversa</h4>
+                    <span id="online-status"></span>
+                </div>
+                <div class="chat-actions">
+                    <button id="attach-btn"><i class="fas fa-paperclip"></i></button>
+                    <input type="file" id="file-input" style="display: none;">
+                </div>
+            </div>
+
+            <div id="messages-container" class="messages-container">
+                <!-- Messages will be loaded here -->
+            </div>
+
+            <div class="message-input-container">
+                <div id="typing-indicator" class="typing-indicator hidden">
+                    <span>Alguém está digitando...</span>
+                </div>
+                <div class="message-input">
+                    <input type="text" id="message-input" placeholder="Digite sua mensagem...">
+                    <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="new-chat-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Nova Conversa</h3>
+            <div class="user-list">
+                <!-- Users will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="manage-users-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Gerenciar Usuários</h3>
+            <button id="add-user-btn">Adicionar Usuário</button>
+            <div id="users-list">
+                <!-- Users will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="add-user-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Adicionar Usuário</h3>
+            <form id="add-user-form">
+                <input type="text" id="new-username" placeholder="Usuário" required>
+                <input type="text" id="new-fullname" placeholder="Nome Completo" required>
+                <input type="password" id="new-password" placeholder="Senha Temporária" required>
+                <select id="new-role">
+                    <option value="user">Usuário</option>
+                    <option value="admin">Administrador</option>
+                </select>
+                <button type="submit">Adicionar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="manage-groups-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Gerenciar Grupos</h3>
+            <button id="add-group-btn">Criar Grupo</button>
+            <div id="groups-list">
+                <!-- Groups will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="add-group-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Criar Grupo</h3>
+            <form id="add-group-form">
+                <input type="text" id="group-name" placeholder="Nome do Grupo" required>
+                <button type="submit">Criar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
